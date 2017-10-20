@@ -7,25 +7,30 @@
         <script src="./js/fireprescript.js"></script>
         <script>
             function submitEvent() {
-                var name = $("input[type=text][name=EventName]").val();
-                var location = $("input[type=text][name=Location]").val();
-                var date = $("input[type=text][name=Time]").val();
-                var state = $("select[name=State]").val();
-                var city = $("input[type=text][name=City]").val();
-                var school = $("input[type=text][name=School]").val();
-                var club = $("input[type=text][name=Club]").val();
+                try {
+                    var name = $("input[type=text][name=EventName]").val();
+                    var location = $("input[type=text][name=Location]").val();
+                    var time = $("input[type=text][name=Time]").val();
+                    var state = $("select[name=State]").val();
+                    var city = $("input[type=text][name=City]").val();
+                    var school = $("input[type=text][name=School]").val();
+                    var club = $("input[type=text][name=Club]").val();
 
-                var event = {
-                    title: name,
-                    place: location,
-                    time: time,
-                    club: club
-                  };
+                    var event = {
+                        title: name,
+                        place: location,
+                        time: time,
+                        club: club
+                    };
 
-                  var eventkey = database.ref(state + '/' + city + '/' + school).push().key;
-                  database.ref(state + '/' + city + '/' + school).child(eventkey).set(event);
+                    var eventkey = database.ref(state + '/' + city + '/' + school).push().key;
+                    database.ref(state + '/' + city + '/' + school).child(eventkey).set(event);
 
-                  return false;
+                    return false;
+                } catch (e) {
+                    console.log(e);
+                    return false;
+                }
             }
         </script>
     </head>
