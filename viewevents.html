@@ -41,19 +41,6 @@
                     $("#eventtable").addClass("animated fadeInDown");
                 });
 
-                
-
-                /* events.forEach(function(item) {
-                    var name = item.val().name;
-                    var location = item.val().location;
-                    var time = item.val().time;
-                    var club = item.val().club;
-
-                    var event = "<tr><h2>" + name + "</h2><br/><p>" + location + "<br/>" + time + "<br/>" + club + "</p></tr>";
-
-                    $("#tablecolum").append(event);
-                }); */
-
                 return false;
             }
         </script>
@@ -62,7 +49,7 @@
     <body>
         <div id="backdrop">
             <h1 id="intro">View Events</h1>
-            <form action="" method="get" onsubmit="return viewEvents()" style="text-align:left;color:teal;">
+            <form action="" method="get" onsubmit="return viewEvents();" style="text-align:left;color:teal;">
                 State:<br/><select name="State">
                     <option value="AL">Alabama</option>
                     <option value="AK">Alaska</option>
@@ -118,7 +105,7 @@
                 </select><br/><br/>
                 City:<br/><input type="text" name="City" /><br/><br/>
                 School:<br/><input type="text" name="School" /><br/><br/>
-                <input type="submit" value="Create Event" name="Submit" />
+                <input type="submit" value="View Events" name="Submit" />
             </form>
         </div>
         <script src="./js/postscript.js"></script>
