@@ -1,0 +1,47 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="./css/style.css" />
+        <link rel="stylesheet" type="text/css" href="./css/animate.css" />
+        <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.5.2/firebase.js"></script>
+        <script src="./js/fireprescript.js"></script>
+        <script>
+
+            function submitLogin() {
+                try {
+                    var username = $("input[type=text][name=Username]").val();
+
+                    database.ref('users/' + username).once('value', function(snap) {
+
+                        sessionStorage.setItem('state', snap.val().state);
+                        sessionStorage.setItem('city', snap.val().city);
+                        sessionStorage.setItem('school', snap.val().school);
+
+                        window.location.href = "viewevents.html";
+                    });
+                    return false;
+                } catch (e) {
+                    console.log(e);
+                    return false;
+                }
+            }
+        </script>
+    </head>
+
+    <body>
+        <div style="width:100%;height:100%;display:table;">
+            <div id="noflex">
+                <h1 id="intro" class="fadeInDown">Log In</h1><br/>
+                <form action="viewevents.html" method="get" onsubmit="return submitLogin();" style="text-align:left;color:teal;display:inline-block;">
+                    <input type="text" name="Username"/><br/><br/>
+                    <input type="submit" value="Log In" name="Submit" />
+                </form>
+            </div>
+        </div>
+        <script>
+            var w = $("#intro").css("width");
+            $("input").css("width", w);
+            $("select").css("width", w);
+        </script>
+    </body>
+</html>

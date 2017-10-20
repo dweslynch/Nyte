@@ -43,9 +43,16 @@ h2 {
 	color: teal;
 }
 
+p {
+	color: whitesmoke;
+}
+
 table {
 	overflow-y: auto;
+	display: table;
+	margin: auto;
 }
+
 
 /*
 tr:nth-child(odd) {
@@ -69,6 +76,7 @@ td {
 	border-radius: 5px;
 	margin: 5px;
 	padding: 2px;
+	display: inline-block;
 	/* -webkit-transition: color .5s, background-color .5s;
 	-moz-transition: color .5s, background-color .5s;
 	-o-transition: color .5s, background-color .5s;
@@ -80,8 +88,10 @@ td {
     font-family: 'Anders';
     font-size: 4em;
     margin: 5px;
+    display: inline-block;
 }
 
+/*
 #backdrop {
 	display: flex;
 	flex-direction: column;
@@ -92,4 +102,33 @@ td {
     justify-content: center;
     align-items: center;
     margin: 0px;
+}
+*/
+
+#noflex {
+	background: #444444;
+	width: auto;
+	height: 100%;
+	text-align: center;
+	display: table-cell;
+	vertical-align: middle;
+	margin: 0px;
+}
+
+.floater {
+	position: fixed;
+	margin: 0px;
+	padding: 0px;
+	right: 1%;
+	top: 1%;
+}
+
+.floater h2 {
+	margin: 0px;
+	color: teal;
+}
+
+.orange {
+	color: #C16700;
+	font-weight: bold;
 }
