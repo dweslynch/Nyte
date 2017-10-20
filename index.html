@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="./css/style.css" />
+        <link rel="stylesheet" type="text/css" href="./css/animate.css" />
+        <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    </head>
+    <body>
+        <div id="backdrop">
+            <h1 id="intro" class="animated fadeInDown">Nyte</h1>
+            <a href="./createevent.html" class="EntryButton">Create Event</a>
+            <a href="./viewevents.html" class="EntryButton">View Events</a>
+        </div>
+        <script>
+        	var w = $("#intro").css("width");
+        	$(".EntryButton").css("width", w);
+
+	        $(".EntryButton").hover(function() {
+	        	$(this).css("color", "white");
+				$(this).css("background-color", "teal");
+			});
+			$(".EntryButton").mouseout(function() {
+				$(this).css("color", "teal");
+				$(this).css("background-color", "transparent");
+			});
+        </script>
+        <script src="./js/postscript.js"></script>
+    </body>
+</html>
