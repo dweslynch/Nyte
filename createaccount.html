@@ -12,8 +12,8 @@
                     var username = $("input[type=text][name=Username").val();
 
                     var _state = $("select[name=State]").val();
-                    var _city = $("input[type=text][name=City]").val();
-                    var _school = $("input[type=text][name=School]").val();
+                    var _city = $("input[type=text][name=City]").val().toLowerCase();
+                    var _school = $("input[type=text][name=School]").val().toLowerCase();
 
                     var locale = {
                         state: _state,
