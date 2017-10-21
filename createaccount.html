@@ -1,7 +1,8 @@
 <html>
     <head>
-        <link rel="stylesheet" href="./css/style.css" />
-        <link rel="stylesheet" type="text/css" href="./css/animate.css" />
+        <title>Create Account</title>
+        <link rel='stylesheet' href="./css/style.css" />
+        <link rel='stylesheet' type="text/css" href="./css/animate.css" />
         <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
         <script src="https://www.gstatic.com/firebasejs/4.5.2/firebase.js"></script>
         <script src="./js/fireprescript.js"></script>
@@ -9,21 +10,21 @@
             function submitAccount() {
                 try {
                     var username = $("input[type=text][name=Username").val();
-                    var state = $("select[name=State]").val();
-                    var city = $("input[type=text][name=City]").val();
-                    var school = $("input[type=text][name=School]").val();
+                    var _state = $("select[name=State]").val();
+                    var _city = $("input[type=text][name=City]").val();
+                    var _school = $("input[type=text][name=School]").val();
 
                     var locale = {
-                        state: state,
-                        city: city,
-                        school: school
+                        state: _state,
+                        city: _city,
+                        school: _school
                     };
 
                     database.ref('users/' + username).set(locale);
 
-                    sessionStorage.setItem('state', state);
-                    sessionStorage.setItem('city', city);
-                    sessionStorage.setItem('school', school);
+                    sessionStorage.setItem('state', _state);
+                    sessionStorage.setItem('city', _city);
+                    sessionStorage.setItem('school', _school);
 
                     return true;
                 } catch (e) {
@@ -36,11 +37,11 @@
 
     <body>
         <div style="width:100%;height:100%;display:table;">
-            <div id="noflex">
-                <h1 id="intro" class="animated fadeInDown">Create Account</h1><br/>
-                <form action="viewevents.html" method="get" onsubmit="return submitAccount();" style="text-align:left;color:teal;display:inline-block;">
-                    Username:<br/><input type="text" name="Username"/><br/><br/>
-                    State:<br/><select name="State">
+            <div id='noflex'>
+                <h1 id='intro' class="animated fadeInDown">Create Account</h1><br/>
+                <form action="viewevents.html" method='get' onsubmit="return submitAccount();" style="text-align:left;color:teal;display:inline-block;">
+                    Username:<br/><input type='text' name='Username'/><br/><br/>
+                    State:<br/><select name='State'>
                         <option value="AL">Alabama</option>
                         <option value="AK">Alaska</option>
                         <option value="AZ">Arizona</option>
@@ -93,16 +94,16 @@
                         <option value="WI">Wisconsin</option>
                         <option value="WY">Wyoming</option>
                     </select><br/><br/>
-                    City:<br/><input type="text" name="City" /><br/><br/>
-                    School:<br/><input type="text" name="School" /><br/><br/>
-                    <input type="submit" value="Create Account" name="Submit" />
+                    City:<br/><input type='text' name='City' /><br/><br/>
+                    School:<br/><input type='text' name='School' /><br/><br/>
+                    <input type='submit' value="Create Account" name='Submit' />
                 </form>
             </div>
         </div>
         <script>
-            var w = $("#intro").css("width");
-            $("input").css("width", w);
-            $("select").css("width", w);
+            var w = $('#intro').css('width');
+            $('input').css('width', w);
+            $('select').css('width', w);
         </script>
     </body>
 </html>

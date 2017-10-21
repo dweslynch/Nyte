@@ -1,7 +1,7 @@
 <html>
     <head>
-        <link rel="stylesheet" href="./css/style.css" />
-        <link rel="stylesheet" type="text/css" href="./css/animate.css" />
+        <link rel='stylesheet' href="./css/style.css" />
+        <link rel='stylesheet' type="text/css" href="./css/animate.css" />
         <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
         <script src="https://www.gstatic.com/firebasejs/4.5.2/firebase.js"></script>
         <script src="./js/fireprescript.js"></script>
@@ -11,20 +11,18 @@
                 var city = sessionStorage.getItem('city');
                 var school = sessionStorage.getItem('school');
 
-                console.log(state);
-                console.log(city);
-                console.log(school);
+                var locale = state + '/' + city + '/' + school;
 
-                database.ref(state + '/' + city + '/' + school).once('value', function(snap) {
+                database.ref(locale).once('value', function(snap) {
                     snap.forEach(function(item) {
-                        var name = item.val().title;
-                        var location = item.val().place;
-                        var time = item.val().time;
-                        var club = item.val().club;
+                        var _title = item.val().title;
+                        var _place = item.val().place;
+                        var _time = item.val().time;
+                        var _club = item.val().club;
 
-                        var event = "<tr><td><h2>" + name + "</h2><p><span class='orange'>Location:&nbsp;&nbsp;</span>" + location + "<br/><span class='orange'>Time:&nbsp;&nbsp;</span>" + time + "<br/><span class='orange'>Club:&nbsp;&nbsp;</span>" + club + "</p></td></tr>";
+                        var event = "<tr><td><h2>" + _title + "</h2><p><span class='orange'>Location:&nbsp;&nbsp;</span>" + _place + "<br/><span class='orange'>Time:&nbsp;&nbsp;</span>" + _time + "<br/><span class='orange'>Club:&nbsp;&nbsp;</span>" + _club + "</p></td></tr>";
 
-                        $("#eventtable").append(event);
+                        $('#eventtable'.append(event);
                     });
                 });
             }
@@ -33,25 +31,25 @@
 
     <body>
         <div style="height:100%;width:100%;display:table;">
-            <div id="noflex">
-                <h1 id="intro" class="animated fadeInDown">View Events</h1><br/>
-                <table id="eventtable">
+            <div id='noflex'>
+                <h1 id='intro' class="animated fadeInDown">View Events</h1><br/>
+                <table id='eventtable'>
                     
                 </table>
             </div>
         </div>
-        <div class="floater">
+        <div class='floater'>
             <a href="createevent.html"><h2 class="animated fadeInRight">&plus;&nbsp;&nbsp;Create Event</h2></a>
         </div>
         <script>
-            $("#eventtable").css("width", $("#intro").css("width"));
+            $('#eventtable').css('width', $('#intro').css('width'));
             showEvents();
 
             $(".floater h2").hover(function() {
-                $(".floater h2").css("color", "whitesmoke");
+                $(".floater h2").css('color', 'whitesmoke');
             });
             $(".floater h2").mouseout(function() {
-                $(".floater h2").css("color", "teal");
+                $(".floater h2").css('color', 'teal');
             });
         </script>
     </body>

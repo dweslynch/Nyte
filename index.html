@@ -1,28 +1,29 @@
 <html>
     <head>
-        <link rel="stylesheet" href="./css/style.css" />
-        <link rel="stylesheet" type="text/css" href="./css/animate.css" />
+        <title>Nyte</title>
+        <link rel='stylesheet' href="./css/style.css" />
+        <link rel='stylesheet' type="text/css" href="./css/animate.css" />
         <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
     </head>
     <body>
         <div style="width:100%;height:100%;display:table;">
-            <div id="noflex">
-                <h1 id="intro" class="animated fadeInDown">Nyte</h1><br/>
-                <a href="./login.html" class="EntryButton">Sign In</a><br/>
-                <a href="./createaccount.html" class="EntryButton">Create Account</a>
+            <div id='noflex'>
+                <h1 id='intro' class="animated fadeInDown">Nyte</h1><br/>
+                <a href="./login.html" class='EntryButton'>Sign In</a><br/>
+                <a href="./createaccount.html" class='EntryButton'>Create Account</a>
             </div>
         </div>
         <script>
-        	var w = $("#intro").css("width");
-        	$(".EntryButton").css("width", w);
+        	var w = $('#intro').css('width');
+        	$('.EntryButton').css('width', w);
 
-	        $(".EntryButton").hover(function() {
-	        	$(this).css("color", "white");
-				$(this).css("background-color", "teal");
+	        $('.EntryButton').hover(function() {
+	        	$(this).css('color', 'white');
+				$(this).css('background-color', 'teal');
 			});
-			$(".EntryButton").mouseout(function() {
-				$(this).css("color", "teal");
-				$(this).css("background-color", "transparent");
+			$('.EntryButton').mouseout(function() {
+				$(this).css('color', 'teal');
+				$(this).css('background-color', 'transparent');
 			});
         </script>
     </body>

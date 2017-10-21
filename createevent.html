@@ -1,30 +1,33 @@
 <html>
     <head>
-        <link rel="stylesheet" href="./css/style.css" />
-        <link rel="stylesheet" type="text/css" href="./css/animate.css" />
+        <title>Create Event</title>
+        <link rel='stylesheet' href="./css/style.css" />
+        <link rel='stylesheet' type="text/css" href="./css/animate.css" />
         <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
         <script src="https://www.gstatic.com/firebasejs/4.5.2/firebase.js"></script>
         <script src="./js/fireprescript.js"></script>
         <script>
             function submitEvent() {
                 try {
-                    var name = $("input[type=text][name=EventName]").val();
-                    var location = $("input[type=text][name=Location]").val();
-                    var time = $("input[type=text][name=Time]").val();
-                    var state = sessionStorage.getItem('state');
-                    var city = sessionStorage.getItem('city');
-                    var school = sessionStorage.getItem('school');
-                    var club = $("input[type=text][name=Club]").val();
+                    var _name = $("input[type=text][name=EventName]").val();
+                    var _place = $("input[type=text][name=Location]").val();
+                    var _time = $("input[type=text][name=Time]").val();
+                    var _club = $("input[type=text][name=Club]").val();
+                    var _state = sessionStorage.getItem('state');
+                    var _city = sessionStorage.getItem('city');
+                    var _school = sessionStorage.getItem('school');
 
                     var event = {
-                        title: name,
-                        place: location,
-                        time: time,
-                        club: club
+                        title: _name,
+                        place: _place,
+                        time: _time,
+                        club: _club
                     };
 
-                    var eventkey = database.ref(state + '/' + city + '/' + school).push().key;
-                    database.ref(state + '/' + city + '/' + school).child(eventkey).set(event);
+                    var locale = _state + '/' + _city + '/' + _school;
+
+                    var eventkey = database.ref(locale).push().key;
+                    database.ref(locale).child(eventkey).set(event);
 
                     return true;
                 } catch (e) {
@@ -37,21 +40,21 @@
 
     <body>
         <div style="width:100%;height:100%;display:table;">
-            <div id="noflex">
-                <h1 id="intro" class="animated fadeInDown">Create Event</h1><br/>
-                <form action="viewevents.html" method="get" onsubmit="return submitEvent();" style="text-align:left;color:teal;display:inline-block;">
-                    Event Name:<br/><input type="text" name="EventName"/><br/><br/>
-                    Location:<br/><input type="text" name="Location"/><br/><br/>
-                    Time:<br/><input type="text" name="Time"/><br/><br/>
-                    Club:<br/><input type="text" name="Club" /><br/><br/>
-                    <input type="submit" value="Create Event" name="Submit" />
+            <div id='noflex'>
+                <h1 id='intro' class="animated fadeInDown">Create Event</h1><br/>
+                <form action="viewevents.html" method='get' onsubmit="return submitEvent();" style="text-align:left;color:teal;display:inline-block;">
+                    Event Name:<br/><input type='text' name='EventName'/><br/><br/>
+                    Location:<br/><input type='text' name='Place'/><br/><br/>
+                    Time:<br/><input type='text' name='Time'/><br/><br/>
+                    Club:<br/><input type='text' name='Club' /><br/><br/>
+                    <input type='submit' value="Create Event" name='Submit' />
                 </form>
             </div>
         </div>
         <script>
-            var w = $("#intro").css("width");
-            $("input").css("width", w);
-            $("select").css("width", w);
+            var w = $('#intro').css("width");
+            $('input').css('width', w);
+            $('select').css('width', w);
         </script>
     </body>
 </html>
