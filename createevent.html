@@ -9,8 +9,8 @@
         <script>
             function submitEvent() {
                 try {
-                    var _name = $("input[type=text][name=EventName]").val();
-                    var _place = $("input[type=text][name=Location]").val();
+                    var _title = $("input[type=text][name=EventName]").val();
+                    var _place = $("input[type=text][name=Place]").val();
                     var _time = $("input[type=text][name=Time]").val();
                     var _club = $("input[type=text][name=Club]").val();
                     var _state = sessionStorage.getItem('state');
@@ -18,7 +18,7 @@
                     var _school = sessionStorage.getItem('school');
 
                     var event = {
-                        title: _name,
+                        title: _title,
                         place: _place,
                         time: _time,
                         club: _club
@@ -27,7 +27,7 @@
                     var locale = _state + '/' + _city + '/' + _school;
 
                     var eventkey = database.ref(locale).push().key;
-                    database.ref(locale).child(eventkey).set(event);
+                    database.ref(locale + '/' + eventkey).set(event);
 
                     return true;
                 } catch (e) {
