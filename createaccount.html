@@ -3,13 +3,14 @@
         <title>Create Account</title>
         <link rel='stylesheet' href="./css/style.css" />
         <link rel='stylesheet' href="./css/animate.css" />
-        <script src="./js/jquery-3.2.1.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
         <script src="https://www.gstatic.com/firebasejs/4.5.2/firebase.js"></script>
         <script src="./js/fireprescript.js"></script>
         <script>
             function submitAccount() {
                 try {
                     var username = $("input[type=text][name=Username").val();
+
                     var _state = $("select[name=State]").val();
                     var _city = $("input[type=text][name=City]").val();
                     var _school = $("input[type=text][name=School]").val();
@@ -20,12 +21,15 @@
                         school: _school
                     };
 
+                    // Write new user to firebase
                     database.ref('users/' + username).set(locale);
 
+                    // Now sign them in
                     sessionStorage.setItem('state', _state);
                     sessionStorage.setItem('city', _city);
                     sessionStorage.setItem('school', _school);
 
+                    // Redirect to events page
                     return true;
                 } catch (e) {
                     console.log(e);
@@ -40,7 +44,8 @@
             <div id='noflex'>
                 <h1 id='intro' class="animated fadeInDown">Create Account</h1><br/>
                 <form action="viewevents.html" method='get' onsubmit="return submitAccount();" style="text-align:left;color:teal;display:inline-block;">
-                    Username:<br/><input type='text' name='Username'/><br/><br/>
+                    Username:<br/><input type='text' name='Username'/><br/>
+                    <span style="font-weight:bold;" id="availability"></span><br/>
                     State:<br/><select name='State'>
                         <option value="AL">Alabama</option>
                         <option value="AK">Alaska</option>
@@ -101,9 +106,40 @@
             </div>
         </div>
         <script>
+            // Make everything same width as header
             var w = $('#intro').css('width');
             $('input').css('width', w);
             $('select').css('width', w);
+
+            // Can't submit form till username is validated
+            $('input[type=submit]').attr('disabled', true);
+            $('input[type=submit]').hide();
+
+            // Validate username
+            $("input[type=text][name=Username]").focusout(function() {
+                var _username = $(this).val();
+                database.ref('users/' + _username).once('value', function(snap) {
+                    if (snap.val() != null || _username.length < 5) {
+                        // User already exists or invalid name
+                        $('#availability').css('color', 'red');
+                        $('#availability').text('Not Available');
+                        $('input[type=submit]').attr('disabled', true);
+                        $('input[type=submit]').hide();
+                    } else {
+                        // Username available
+                        $('#availability').css('color', 'green');
+                        $('#availability').text('Available');
+                        $('input[type=submit]').removeAttr('disabled');
+                        $('input[type=submit]').show();
+                    }
+                });
+            });
+
+            // Don't want them entering a valid username and then changing it :)
+            $("input[type=text][name=Username]").focus(function() {
+                $('input[type=submit]').attr('disabled', true)
+                $('input[type=submit]').hide();
+            });
         </script>
     </body>
 </html>

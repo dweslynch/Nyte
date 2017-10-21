@@ -3,7 +3,7 @@
         <title>Events</title>
         <link rel='stylesheet' href="./css/style.css" />
         <link rel='stylesheet' href="./css/animate.css" />
-        <script src="./js/jquery-3.2.1.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
         <script src="https://www.gstatic.com/firebasejs/4.5.2/firebase.js"></script>
         <script src="./js/fireprescript.js"></script>
         <script>
@@ -43,14 +43,18 @@
             <a href="createevent.html"><h2 class="animated fadeInRight">&plus;&nbsp;&nbsp;Create Event</h2></a>
         </div>
         <script>
-            $('#eventtable').css('width', $('#intro').css('width'));
+            // Make everything same width as header
+            var w = $('#intro').css('width');
+            $('#eventtable').css('width', w);
+
+            // Populate table
             showEvents();
 
             $(".floater h2").hover(function() {
-                $(".floater h2").css('color', 'whitesmoke');
+                $(this).css('color', 'whitesmoke');
             });
             $(".floater h2").mouseout(function() {
-                $(".floater h2").css('color', 'teal');
+                $(this).css('color', 'teal');
             });
         </script>
     </body>
