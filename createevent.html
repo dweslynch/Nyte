@@ -40,8 +40,8 @@
 
     <body>
         <div style="width:100%;height:100%;display:table;">
-            <div id='noflex'>
-                <h1 id='intro' class="animated fadeInDown">Create Event</h1><br/>
+            <div class='noflex'>
+                <h1 class="intro animated fadeInDown">Create Event</h1><br/>
                 <form action="viewevents.html" method='get' onsubmit="return submitEvent();" style="text-align:left;color:teal;display:inline-block;">
                     Event Name:<br/><input type='text' name='EventName'/><br/><br/>
                     Location:<br/><input type='text' name='Place'/><br/><br/>
@@ -53,9 +53,10 @@
         </div>
         <script>
             // Make everything same width as header
-            var w = $('#intro').css("width");
-            $('input').css('width', w);
-            $('select').css('width', w);
+            $(window).bind("load", function() { // Make sure Anders font is loaded
+                var w = $('.intro').css('width');
+                $('input').css('width', w);
+            });
         </script>
     </body>
 </html>

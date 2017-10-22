@@ -23,7 +23,7 @@
                     var _state = $("select[name=State]").val();
                     var _city = $("input[type=text][name=City]").val();
                     _city = titleCase(_city);
-                    var _school = $("input[type=text][name=School]").val().toLowerCase();
+                    var _school = $("input[type=text][name=School]").val();
                     _school = titleCase(_school);
 
                     var locale = {
@@ -53,8 +53,8 @@
 
     <body>
         <div style="width:100%;height:100%;display:table;">
-            <div id='noflex'>
-                <h1 id='intro' class="animated fadeInDown">Create Account</h1><br/>
+            <div class='noflex'>
+                <h1 class="intro animated fadeInDown">Create Account</h1><br/>
                 <form action="viewevents.html" method='get' onsubmit="return submitAccount();" style="text-align:left;color:teal;display:inline-block;">
                     Username:<br/><input type='text' name='Username'/><br/>
                     <span style="font-weight:bold;" id="availability"></span><br/>
@@ -113,22 +113,24 @@
                     </select><br/><br/>
                     City:<br/><input type='text' name='City' /><br/><br/>
                     School:<br/><input type='text' name='School' /><br/><br/>
-                    <input type='submit' value="Create Account" name='Submit' />
+                    <input type='submit' value="Create Account" name='Submit' class='conditional' />
                 </form>
             </div>
         </div>
         <script>
             // Make everything same width as header
-            var w = $('#intro').css('width');
-            $('input').css('width', w);
-            $('select').css('width', w);
+            $(window).bind("load", function() { // Make sure Anders font is loaded
+                var w = $('.intro').css('width');
+                $('input').css('width', w);
+                $('select').css('width', w);
+            });
 
             // Can't submit form till username is validated
             $('input[type=submit]').attr('disabled', true);
-            $('input[type=submit]').hide();
+            //$('input[type=submit]').hide();
 
-            // Validate username
-            $("input[type=text][name=Username]").focusout(function() {
+            // Hot Validation
+            $("input[type=text][name=Username]").keyup(function() {
                 var _username = $(this).val();
                 database.ref('users/' + _username).once('value', function(snap) {
                     if (snap.val() != null || _username.length < 5) {
@@ -136,21 +138,15 @@
                         $('#availability').css('color', 'red');
                         $('#availability').text('Not Available');
                         $('input[type=submit]').attr('disabled', true);
-                        $('input[type=submit]').hide();
+                        $('input[type=submit]').css('opacity', '0.0');
                     } else {
                         // Username available
                         $('#availability').css('color', 'green');
                         $('#availability').text('Available');
                         $('input[type=submit]').removeAttr('disabled');
-                        $('input[type=submit]').show();
+                        $('input[type=submit]').css('opacity', '1.0');
                     }
                 });
-            });
-
-            // Don't want them entering a valid username and then changing it :)
-            $("input[type=text][name=Username]").focus(function() {
-                $('input[type=submit]').attr('disabled', true)
-                $('input[type=submit]').hide();
             });
         </script>
     </body>
