@@ -2,6 +2,11 @@
 @import url("../fonts/Anders.ttf");
 @import url("https://fonts.googleapis.com/css?family=Open+Sans|Roboto");
 
+@font-face {
+	font-family: 'Anders';
+	src: url("../fonts/Anders.ttf");
+}
+
 html {
     padding: 0px;
     margin: 0px;
@@ -83,6 +88,7 @@ td {
 .floater h2 {
 	margin: 0px;
 	color: teal;
+	text-align: right;
 }
 
 .orange {
