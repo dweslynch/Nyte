@@ -26,8 +26,8 @@
 
                     var locale = _state + '/' + _city + '/' + _school;
 
-                    var eventkey = database.ref(locale).push().key;
-                    database.ref(locale + '/' + eventkey).set(event);
+                    var eventkey = database.ref('events/' + locale).push().key;
+                    database.ref('events/' + locale).child(eventkey).set(event);
 
                     return true;
                 } catch (e) {

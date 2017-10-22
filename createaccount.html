@@ -7,13 +7,24 @@
         <script src="https://www.gstatic.com/firebasejs/4.5.2/firebase.js"></script>
         <script src="./js/fireprescript.js"></script>
         <script>
+
+            function titleCase(str) {
+                str = str.toLowerCase().split(' ');
+                for (var i = 0; i < str.length; i++) {
+                    str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1); 
+                }
+                return str.join(' ');
+            }
+
             function submitAccount() {
                 try {
                     var username = $("input[type=text][name=Username").val();
 
                     var _state = $("select[name=State]").val();
-                    var _city = $("input[type=text][name=City]").val().toLowerCase();
+                    var _city = $("input[type=text][name=City]").val();
+                    _city = titleCase(_city);
                     var _school = $("input[type=text][name=School]").val().toLowerCase();
+                    _school = titleCase(_school);
 
                     var locale = {
                         state: _state,
@@ -23,6 +34,7 @@
 
                     // Write new user to firebase
                     database.ref('users/' + username).set(locale);
+                    database.ref('schools/' + _state + '/' + _city + '/' + _school +'/open').set(true);
 
                     // Now sign them in
                     sessionStorage.setItem('state', _state);

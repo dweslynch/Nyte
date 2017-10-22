@@ -14,7 +14,7 @@
 
                 var locale = state + '/' + city + '/' + school;
 
-                database.ref(locale).once('value', function(snap) {
+                database.ref('events/' + locale).once('value', function(snap) {
                     snap.forEach(function(item) {
                         var _title = item.val().title;
                         var _place = item.val().place;
