@@ -1,11 +1,17 @@
 <html>
     <head>
         <title>Create Event</title>
-        <link rel='stylesheet' href="./css/style.css" />
         <link rel='stylesheet' href="./css/animate.css" />
+        <link rel='stylesheet' href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link rel='stylesheet' href="./css/jquery-ui.theme.css" />
+        <link rel='stylesheet' href="./css/style.css" />
         <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/4.5.2/firebase.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.5.2/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.5.2/firebase-database.js"></script>
+        <!-- script src="https://www.gstatic.com/firebasejs/4.5.2/firebase.js"></script -->
         <script src="./js/fireprescript.js"></script>
+        <script src="./js/useful.js"></script>
         <script>
             function submitEvent() {
                 try {
@@ -16,6 +22,10 @@
                     var _state = sessionStorage.getItem('state');
                     var _city = sessionStorage.getItem('city');
                     var _school = sessionStorage.getItem('school');
+
+                    if (_club == '' || _club == null || _club == 'Open to anyone') {
+                        _club = "Open";
+                    }
 
                     var event = {
                         title: _title,
@@ -46,17 +56,20 @@
                     Event Name:<br/><input type='text' name='EventName'/><br/><br/>
                     Location:<br/><input type='text' name='Place'/><br/><br/>
                     Time:<br/><input type='text' name='Time'/><br/><br/>
-                    Club:<br/><input type='text' name='Club' /><br/><br/>
+                    Club:<br/><input type='text' name='Club' placeholder='Open to anyone' id='clubbox'/><br/><br/>
                     <input type='submit' value="Create Event" name='Submit' />
                 </form>
             </div>
         </div>
         <script>
             // Make everything same width as header
-            $(window).bind("load", function() { // Make sure Anders font is loaded
+            $(window).bind("load", function() {
                 var w = $('.intro').css('width');
                 $('input').css('width', w);
             });
+
+            // Populate with list of clubs
+            $('#clubbox').autocomplete({ source: getClubs() });
         </script>
     </body>
 </html>

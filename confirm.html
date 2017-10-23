@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <title>Welcome to Nyte</title>
+        <link rel='stylesheet' href="./css/style.css" />
+        <link rel='stylesheet' href="./css/animate.css" />
+        <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    </head>
+
+    <body>
+        <div style="width:100%;height:100%;display:table;">
+            <div class='noflex'>
+                <h1 class="intro animated fadeInDown">Welcome to Nyte</h1><br/>
+            </div>
+        </div>
+        <script>
+            // Show confirmation
+            $('.noflex').append("<p id='message'>Your account has been created and you are signed in as " + sessionStorage.getItem('user') + ".  You can now <a href='./viewevents.html'>view events</a> or <a href='./joinclub.html'>join a club</a>.</p>");
+
+            // Make everything same width as header
+            $(window).bind("load", function() {
+                var w = $('.intro').css('width');
+                $('#message').css('width', w);
+            });
+
+            $('a').hover(function() {
+                $(this).css('color', '#C16700');
+            });
+            $('a').mouseout(function() {
+                $(this).css('color', 'teal');
+            });
+        </script>
+    </body>
+</html>

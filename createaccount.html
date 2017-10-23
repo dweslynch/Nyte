@@ -2,31 +2,25 @@
     <head>
         <title>Create Account</title>
         <link rel='stylesheet' href="./css/animate.css" />
-        <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <!-- link rel='stylesheet' href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" -->
+        <link rel='stylesheet' href="./css/jquery-ui.theme.css" />
         <link rel='stylesheet' href="./css/style.css" />
         <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/4.5.2/firebase.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.5.2/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.5.2/firebase-database.js"></script>
         <script src="./js/fireprescript.js"></script>
+        <script src="./js/useful.js"></script>
         <script>
-
-            function titleCase(str) {
-                str = str.toLowerCase().split(' ');
-                for (var i = 0; i < str.length; i++) {
-                    str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1); 
-                }
-                return str.join(' ');
-            }
-
             function submitAccount() {
                 try {
                     var username = $("input[type=text][name=Username").val();
 
                     var _state = $("select[name=State]").val();
                     var _city = $("input[type=text][name=City]").val();
-                    _city = titleCase(_city);
+                    _city = titleCase(_city); // Standardize formatting for database
                     var _school = $("input[type=text][name=School]").val();
-                    _school = titleCase(_school);
+                    _school = titleCase(_school); // Standardize formatting for database
 
                     var locale = {
                         state: _state,
@@ -36,9 +30,11 @@
 
                     // Write new user to firebase
                     database.ref('users/' + username).set(locale);
+                    database.ref('users/' + username + '/clubs/Open').set(true);
                     database.ref('schools/' + _state + '/' + _city + '/' + _school +'/Open').set(true);
 
                     // Now sign them in
+                    sessionStorage.setItem('user', username);
                     sessionStorage.setItem('state', _state);
                     sessionStorage.setItem('city', _city);
                     sessionStorage.setItem('school', _school);
@@ -121,7 +117,7 @@
         </div>
         <script>
             // Make everything same width as header
-            $(window).bind("load", function() { // Make sure Anders font is loaded
+            $(window).bind("load", function() {
                 var w = $('.intro').css('width');
                 $('input').css('width', w);
                 $('select').css('width', w);
@@ -129,7 +125,6 @@
 
             // Can't submit form till username is validated
             $('input[type=submit]').attr('disabled', true);
-            //$('input[type=submit]').hide();
 
             // Hot Validation
             $("input[type=text][name=Username]").keyup(function() {
@@ -182,6 +177,7 @@
                     });
                 });
 
+                // Doing this inside .focus() that way we can assume they've already typed in city/state
                 $(this).autocomplete({ source: schools });
             });
         </script>

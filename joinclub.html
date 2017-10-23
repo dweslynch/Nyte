@@ -1,0 +1,70 @@
+<html>
+    <head>
+        <title>Join A Club</title>
+        <link rel='stylesheet' href="./css/animate.css" />
+        <link rel='stylesheet' href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link rel='stylesheet' href="./css/jquery-ui.theme.css" />
+        <link rel='stylesheet' href="./css/style.css" />
+        <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.5.2/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.5.2/firebase-database.js"></script>
+        <script src="./js/fireprescript.js"></script>
+        <script src="./js/useful.js"></script>
+        <script>
+            function submitClub() {
+                try {
+                    var username = sessionStorage.getItem('user');
+
+                    var club = $("input[type=text][name=Club]").val();
+                    club = titleCase(club); // Standardize formatting for database
+
+                    database.ref('users/' + username + '/clubs/' + club).set(true);
+
+                    // Redirect to events page
+                    return true;
+                } catch (e) {
+                    console.log(e);
+                    return false;
+                }
+            }
+        </script>
+    </head>
+
+    <body>
+        <div style="width:100%;height:100%;display:table;">
+            <div class='noflex'>
+                <h1 class="intro animated fadeInDown">Add A Club</h1><br/>
+                <form action="viewevents.html" method='get' onsubmit="return submitClub();" style="text-align:left;color:teal;display:inline-block;">
+                    <input type='text' name='Club' id='clubbox' /><br/><br/>
+                    <input type='submit' value="Join Club" name='Submit' class='conditional' />
+                </form>
+            </div>
+        </div>
+        <script>
+            // Make everything same width as header
+            $(window).bind("load", function() {
+                var w = $('.intro').css('width');
+                $('input').css('width', w);
+            });
+
+            // Start with submit disabled
+            $('input[type=submit]').attr('disabled', true);
+
+            // Can't login unless you can :)
+            $("input[type=text][name=Club]").keyup(function() {
+                var _clubname = $(this).val();
+
+                if (_clubname.length > 0) {
+                    $('input[type=submit]').removeAttr('disabled');
+                    $('input[type=submit]').css('opacity', '1.0');
+                } else {
+                    $('input[type=submit]').attr('disabled', true);
+                    $('input[type=submit]').css('opacity', '0.0');
+                }
+            });
+
+            $('#clubbox').autocomplete({ source: getClubs() });
+        </script>
+    </body>
+</html>

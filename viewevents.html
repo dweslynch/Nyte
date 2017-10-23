@@ -4,8 +4,10 @@
         <link rel='stylesheet' href="./css/style.css" />
         <link rel='stylesheet' href="./css/animate.css" />
         <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/4.5.2/firebase.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.5.2/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.5.2/firebase-database.js"></script>
         <script src="./js/fireprescript.js"></script>
+        <script src="./js/useful.js"></script>
         <script>
             function showEvents() {
                 var state = sessionStorage.getItem('state');
@@ -21,12 +23,17 @@
                         var _time = item.val().time;
                         var _club = item.val().club;
 
-                        var event = "<tr><td><h2>" + _title + "</h2><p><span class='orange'>Location:&nbsp;&nbsp;</span>" + _place + "<br/><span class='orange'>Time:&nbsp;&nbsp;</span>" + _time + "<br/><span class='orange'>Club:&nbsp;&nbsp;</span>" + _club + "</p></td></tr>";
+                        if (clubs.indexOf(_club) > -1) {
+                            var event = "<tr><td><h2>" + _title + "</h2><span class='orange'>Location:&nbsp;&nbsp;</span>" + _place + "<br/><span class='orange'>Time:&nbsp;&nbsp;</span>" + _time + "<br/><span class='orange'>Club:&nbsp;&nbsp;</span>" + _club + "</td></tr>";
 
-                        $('#eventtable').append(event);
+                            $('#eventtable').append(event);
+                        }
                     });
                 });
             }
+
+            // Go ahead and fetch user's clubs
+            var clubs = getClubs();
         </script>
     </head>
 
@@ -39,12 +46,13 @@
                 </table>
             </div>
         </div>
-        <div class='floater'>
-            <a href="createevent.html"><h2 class="animated fadeInRight">&plus;&nbsp;&nbsp;Create Event</h2></a>
+        <div class="floater animated fadeInRight">
+            <a href="createevent.html"><h2>Create Event&nbsp;&nbsp;&plus;</h2></a>
+            <a href="joinclub.html"><h2>Join Club&nbsp;&nbsp;&plus;</h2></a>
         </div>
         <script>
             // Make everything same width as header
-            $(window).bind("load", function() { // Make sure Anders font is loaded
+            $(window).bind("load", function() {
                 var w = $('.intro').css('width');
                 $('#eventtable').css('width', w);
             });
@@ -52,12 +60,13 @@
             // Populate table
             showEvents();
 
+            /*
             $(".floater h2").hover(function() {
                 $(this).css('color', 'whitesmoke');
             });
             $(".floater h2").mouseout(function() {
                 $(this).css('color', 'teal');
-            });
+            }); */
         </script>
     </body>
 </html>
