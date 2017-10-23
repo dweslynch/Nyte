@@ -8,14 +8,14 @@
  *
  * http://api.jqueryui.com/category/theming/
  *
- * To view and modify this theme, visit http://jqueryui.com/themeroller/?scope=&folderName=custom-theme&bgImgOpacityError=&bgImgOpacityHighlight=&bgImgOpacityActive=&bgImgOpacityHover=&bgImgOpacityDefault=&bgImgOpacityContent=&bgImgOpacityHeader=&cornerRadiusShadow=8px&offsetLeftShadow=0px&offsetTopShadow=0px&thicknessShadow=5px&opacityShadow=30&bgImgOpacityShadow=0&bgTextureShadow=flat&bgColorShadow=%23666666&opacityOverlay=30&bgImgOpacityOverlay=0&bgTextureOverlay=flat&bgColorOverlay=%23aaaaaa&iconColorError=%23cc0000&fcError=%235f3f3f&borderColorError=%23f1a899&bgTextureError=flat&bgColorError=%23fddfdf&iconColorHighlight=%23777620&fcHighlight=%23f5f5f5&borderColorHighlight=%23303003&bgTextureHighlight=flat&bgColorHighlight=%23303030&iconColorActive=%23ffffff&fcActive=%23080808&borderColorActive=%23f5f5f5&bgTextureActive=flat&bgColorActive=%23f5f5f5&iconColorHover=%23555555&fcHover=%23f5f5f5&borderColorHover=%23f5f5f5&bgTextureHover=flat&bgColorHover=%23444444&iconColorDefault=%23777777&fcDefault=%23f5f5f5&borderColorDefault=%23444444&bgTextureDefault=flat&bgColorDefault=%23444444&iconColorContent=%23444444&fcContent=%23f5f5f5&borderColorContent=%23303030&bgTextureContent=flat&bgColorContent=%23303030&iconColorHeader=%23f5f5f5&fcHeader=%23f5f5f5&borderColorHeader=%23444444&bgTextureHeader=flat&bgColorHeader=%23444444&cornerRadius=3px&fwDefault=normal&fsDefault=1em&ffDefault=Arial%2CArial%2CArial
+ * To view and modify this theme, visit http://jqueryui.com/themeroller/?scope=&folderName=custom-theme&bgImgOpacityError=&bgImgOpacityHighlight=&bgImgOpacityActive=&bgImgOpacityHover=&bgImgOpacityDefault=&bgImgOpacityContent=&bgImgOpacityHeader=&cornerRadiusShadow=8px&offsetLeftShadow=0px&offsetTopShadow=0px&thicknessShadow=5px&opacityShadow=30&bgImgOpacityShadow=0&bgTextureShadow=flat&bgColorShadow=%23666666&opacityOverlay=30&bgImgOpacityOverlay=0&bgTextureOverlay=flat&bgColorOverlay=%23aaaaaa&iconColorError=%23cc0000&fcError=%235f3f3f&borderColorError=%23f1a899&bgTextureError=flat&bgColorError=%23fddfdf&iconColorHighlight=%23777620&fcHighlight=%23777620&borderColorHighlight=%23dad55e&bgTextureHighlight=flat&bgColorHighlight=%23fffa90&iconColorActive=%23ffffff&fcActive=%23ffffff&borderColorActive=%23f5f5f5&bgTextureActive=flat&bgColorActive=%23444444&iconColorHover=%23555555&fcHover=%232b2b2b&borderColorHover=%23cccccc&bgTextureHover=flat&bgColorHover=%23444444&iconColorDefault=%23777777&fcDefault=%23454545&borderColorDefault=%23c5c5c5&bgTextureDefault=flat&bgColorDefault=%23444444&iconColorContent=%23444444&fcContent=%23333333&borderColorContent=%23dddddd&bgTextureContent=flat&bgColorContent=%23f5f5f5&iconColorHeader=%23444444&fcHeader=%23333333&borderColorHeader=%23dddddd&bgTextureHeader=flat&bgColorHeader=%23f5f5f5&cornerRadius=3px&fwDefault=normal&fsDefault=1em&ffDefault=Arial%2CHelvetica%2Csans-serif
  */
 
 
 /* Component containers
 ----------------------------------*/
 .ui-widget {
-	font-family: Arial,Arial,Arial;
+	font-family: Arial,Helvetica,sans-serif;
 	font-size: 1em;
 }
 .ui-widget .ui-widget {
@@ -25,28 +25,28 @@
 .ui-widget select,
 .ui-widget textarea,
 .ui-widget button {
-	font-family: Arial,Arial,Arial;
+	font-family: Arial,Helvetica,sans-serif;
 	font-size: 1em;
 }
 .ui-widget.ui-widget-content {
-	border: 1px solid #444444;
+	border: 1px solid #c5c5c5;
 }
 .ui-widget-content {
-	border: 1px solid #303030;
-	background: #303030;
-	color: #f5f5f5;
+	border: 1px solid #dddddd;
+	background: #f5f5f5;
+	color: #333333;
 }
 .ui-widget-content a {
-	color: #f5f5f5;
+	color: #333333;
 }
 .ui-widget-header {
-	border: 1px solid #444444;
-	background: #444444;
-	color: #f5f5f5;
+	border: 1px solid #dddddd;
+	background: #f5f5f5;
+	color: #333333;
 	font-weight: bold;
 }
 .ui-widget-header a {
-	color: #f5f5f5;
+	color: #333333;
 }
 
 /* Interaction states
@@ -60,10 +60,10 @@
 works properly when clicked or hovered */
 html .ui-button.ui-state-disabled:hover,
 html .ui-button.ui-state-disabled:active {
-	border: 1px solid #444444;
+	border: 1px solid #c5c5c5;
 	background: #444444;
 	font-weight: normal;
-	color: #f5f5f5;
+	color: #454545;
 }
 .ui-state-default a,
 .ui-state-default a:link,
@@ -72,7 +72,7 @@ a.ui-button,
 a:link.ui-button,
 a:visited.ui-button,
 .ui-button {
-	color: #f5f5f5;
+	color: #454545;
 	text-decoration: none;
 }
 .ui-state-hover,
@@ -83,10 +83,10 @@ a:visited.ui-button,
 .ui-widget-header .ui-state-focus,
 .ui-button:hover,
 .ui-button:focus {
-	border: 1px solid #f5f5f5;
+	border: 1px solid #cccccc;
 	background: #444444;
 	font-weight: normal;
-	color: #f5f5f5;
+	color: #2b2b2b;
 }
 .ui-state-hover a,
 .ui-state-hover a:hover,
@@ -98,7 +98,7 @@ a:visited.ui-button,
 .ui-state-focus a:visited,
 a.ui-button:hover,
 a.ui-button:focus {
-	color: #f5f5f5;
+	color: #2b2b2b;
 	text-decoration: none;
 }
 
@@ -112,19 +112,19 @@ a.ui-button:active,
 .ui-button:active,
 .ui-button.ui-state-active:hover {
 	border: 1px solid #f5f5f5;
-	background: #f5f5f5;
+	background: #444444;
 	font-weight: normal;
-	color: #080808;
+	color: #ffffff;
 }
 .ui-icon-background,
 .ui-state-active .ui-icon-background {
 	border: #f5f5f5;
-	background-color: #080808;
+	background-color: #ffffff;
 }
 .ui-state-active a,
 .ui-state-active a:link,
 .ui-state-active a:visited {
-	color: #080808;
+	color: #ffffff;
 	text-decoration: none;
 }
 
@@ -133,18 +133,18 @@ a.ui-button:active,
 .ui-state-highlight,
 .ui-widget-content .ui-state-highlight,
 .ui-widget-header .ui-state-highlight {
-	border: 1px solid #303003;
-	background: #303030;
-	color: #f5f5f5;
+	border: 1px solid #dad55e;
+	background: #fffa90;
+	color: #777620;
 }
 .ui-state-checked {
-	border: 1px solid #303003;
-	background: #303030;
+	border: 1px solid #dad55e;
+	background: #fffa90;
 }
 .ui-state-highlight a,
 .ui-widget-content .ui-state-highlight a,
 .ui-widget-header .ui-state-highlight a {
-	color: #f5f5f5;
+	color: #777620;
 }
 .ui-state-error,
 .ui-widget-content .ui-state-error,
@@ -199,7 +199,7 @@ a.ui-button:active,
 	background-image: url("images/ui-icons_444444_256x240.png");
 }
 .ui-widget-header .ui-icon {
-	background-image: url("images/ui-icons_f5f5f5_256x240.png");
+	background-image: url("images/ui-icons_444444_256x240.png");
 }
 .ui-state-hover .ui-icon,
 .ui-state-focus .ui-icon,
