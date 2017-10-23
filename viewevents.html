@@ -17,6 +17,12 @@
                 var locale = state + '/' + city + '/' + school;
 
                 database.ref('events/' + locale).once('value', function(snap) {
+                    // No Events
+                    if (snap.val() == null) {
+                        var message = "<tr><td><h2>No Events</h2><p>There are currently no events at your school for clubs you are in.</p></td></tr>";
+                        $('#eventtable').append(message);
+                    }
+                    // Add each event
                     snap.forEach(function(item) {
                         var _title = item.val().title;
                         var _place = item.val().place;
