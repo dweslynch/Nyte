@@ -35,7 +35,7 @@
                 <h1 class="intro animated fadeInDown">Log In</h1><br/>
                 <form action="viewevents.html" method='get' onsubmit="return submitLogin();" style="text-align:left;color:teal;display:inline-block;">
                     <input type='text' name='Username'/><br/><br/>
-                    <input type='submit' value="Sign In" name='Submit' />
+                    <input type='submit' value="Sign In" name='Submit' class='conditional' />
                 </form>
             </div>
         </div>
@@ -44,6 +44,28 @@
             $(window).bind("load", function() { // Make sure Anders font is loaded
                 var w = $('.intro').css('width');
                 $('input').css('width', w);
+            });
+
+            // Can't login unless you can :)
+            $("input[type=text][name=Username]").keyup(function() {
+                var _username = $(this).val();
+                // Don't bother going to the database if their login is too short
+                if (_username.length > 5) {
+                    database.ref('users/' + _username).once('value', function(snap) {
+                        if (snap.val() == null) {
+                            // Account doesn't exist
+                            $('input[type=submit]').attr('disabled', true);
+                            $('input[type=submit]').css('opacity', '0.0');
+                        } else {
+                            // Account exists
+                            $('input[type=submit]').removeAttr('disabled');
+                            $('input[type=submit]').css('opacity', '1.0');
+                        }
+                    });
+                } else {
+                    $('input[type=submit]').attr('disabled', true);
+                    $('input[type=submit]').css('opacity', '0.0');
+                }
             });
         </script>
     </body>
