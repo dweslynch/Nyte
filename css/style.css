@@ -6,6 +6,7 @@
 	src: url("../fonts/anders-webfont.ttf");
 }
 
+/* Elements */
 html {
     padding: 0px;
     margin: 0px;
@@ -69,6 +70,7 @@ td:last-child {
 	border: none;
 }
 
+/* Classes */
 .intro {
     color: #C16700;
     font-family: 'Anders';
@@ -122,4 +124,21 @@ td:last-child {
 	display: table-cell;
 	vertical-align: middle;
 	margin: 0px;
+}
+
+/* ID's */
+#availability {
+	opacity: 0.0;
+	-webkit-transition: color .5s, opacity .5s;
+	-moz-transition: color .5s, opacity .5s;
+	-o-transition: color .5s, opacity .5s;
+	transition: color .5s, opacity .5s;
+}
+
+/* JQueryUI Specifics */
+.ui-autocomplete {
+    background: #303030
+}
+.ui-menu .ui-menu-item {
+    color: whitesmoke;
 }

@@ -1,9 +1,11 @@
 <html>
     <head>
         <title>Create Account</title>
-        <link rel='stylesheet' href="./css/style.css" />
         <link rel='stylesheet' href="./css/animate.css" />
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link rel='stylesheet' href="./css/style.css" />
         <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script src="https://www.gstatic.com/firebasejs/4.5.2/firebase.js"></script>
         <script src="./js/fireprescript.js"></script>
         <script>
@@ -34,7 +36,7 @@
 
                     // Write new user to firebase
                     database.ref('users/' + username).set(locale);
-                    database.ref('schools/' + _state + '/' + _city + '/' + _school +'/open').set(true);
+                    database.ref('schools/' + _state + '/' + _city + '/' + _school +'/Open').set(true);
 
                     // Now sign them in
                     sessionStorage.setItem('state', _state);
@@ -112,7 +114,7 @@
                         <option value="WY">Wyoming</option>
                     </select><br/><br/>
                     City:<br/><input type='text' name='City' /><br/><br/>
-                    School:<br/><input type='text' name='School' /><br/><br/>
+                    School:<br/><input type='text' name='School' id='schoolbox' /><br/><br/>
                     <input type='submit' value="Create Account" name='Submit' class='conditional' />
                 </form>
             </div>
@@ -132,21 +134,55 @@
             // Hot Validation
             $("input[type=text][name=Username]").keyup(function() {
                 var _username = $(this).val();
-                database.ref('users/' + _username).once('value', function(snap) {
-                    if (snap.val() != null || _username.length < 5) {
-                        // User already exists or invalid name
-                        $('#availability').css('color', 'red');
-                        $('#availability').text('Not Available');
-                        $('input[type=submit]').attr('disabled', true);
-                        $('input[type=submit]').css('opacity', '0.0');
-                    } else {
-                        // Username available
-                        $('#availability').css('color', 'green');
-                        $('#availability').text('Available');
-                        $('input[type=submit]').removeAttr('disabled');
-                        $('input[type=submit]').css('opacity', '1.0');
-                    }
+                var alphanumeric = /^[a-z0-9]+$/
+
+                // Don't go to database if login is too short
+                if (_username.length < 5) {
+                    $('#availability').css('opacity', '0.0');
+                    $('input[type=submit]').attr('disabled', true);
+                    $('input[type=submit]').css('opacity', '0.0');
+                } else if (!(_username.match(alphanumeric))) {
+                    // Username contains invalid characters
+                    $('#availability').css('opacity', '1.0');
+                    $('#availability').css('color', 'red');
+                    $('#availability').text('Not Available');
+                    $('input[type=submit]').attr('disabled', true);
+                    $('input[type=submit]').css('opacity', '0.0');
+                } else {
+                    database.ref('users/' + _username).once('value', function(snap) {
+                        if (snap.val() != null) {
+                            // User already exists or invalid name
+                            $('#availability').css('opacity', '1.0');
+                            $('#availability').css('color', 'red');
+                            $('#availability').text('Not Available');
+                            $('input[type=submit]').attr('disabled', true);
+                            $('input[type=submit]').css('opacity', '0.0');
+                        } else {
+                            // Username available
+                            $('#availability').css('opacity', '1.0');
+                            $('#availability').css('color', 'green');
+                            $('#availability').text('Available');
+                            $('input[type=submit]').removeAttr('disabled');
+                            $('input[type=submit]').css('opacity', '1.0');
+                        }
+                    });
+                }
+            });
+
+            $('#schoolbox').focus(function() {
+                var schools = [];
+                var _state = $("select[name=State]").val();
+                var _city = $("input[type=text][name=City]").val();
+                _city = titleCase(_city);
+
+                database.ref('schools/' + _state + '/' + _city).once('value', function(snap) {
+                    snap.forEach(function(item) {
+                        console.log(item.key);
+                        schools.push(item.key);
+                    });
                 });
+
+                $(this).autocomplete({ source: schools });
             });
         </script>
     </body>

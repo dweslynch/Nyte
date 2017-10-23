@@ -49,8 +49,8 @@
             // Can't login unless you can :)
             $("input[type=text][name=Username]").keyup(function() {
                 var _username = $(this).val();
-                // Don't bother going to the database if their login is too short
-                if (_username.length > 5) {
+                // Only go to database if login is long enough
+                if (_username.length >= 5) {
                     database.ref('users/' + _username).once('value', function(snap) {
                         if (snap.val() == null) {
                             // Account doesn't exist
