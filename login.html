@@ -54,7 +54,7 @@
 
             // Can't login unless you can :)
             $("input[type=text][name=Username]").keyup(function() {
-                var _username = $(this).val();
+                var _username = $(this).val().toLowerCase();
                 // Only go to database if login is long enough
                 if (_username.length >= 5) {
                     database.ref('users/' + _username).once('value', function(snap) {
