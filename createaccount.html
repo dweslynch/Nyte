@@ -14,7 +14,7 @@
         <script>
             function submitAccount() {
                 try {
-                    var username = $("input[type=text][name=Username").val();
+                    var username = $("input[type=text][name=Username").val().toLowerCase();
 
                     var _state = $("select[name=State]").val();
                     var _city = $("input[type=text][name=City]").val();
@@ -129,7 +129,7 @@
             // Hot Validation
             $("input[type=text][name=Username]").keyup(function() {
                 var _username = $(this).val();
-                var alphanumeric = /^[a-z0-9_]+$/
+                var alphanumeric = /^[A-Za-z0-9_]+$/
 
                 // Don't go to database if login is too short
                 if (_username.length < 5) {

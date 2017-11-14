@@ -11,7 +11,7 @@
         <script>
             function submitLogin() {
                 try {
-                    var username = $("input[type=text][name=Username]").val();
+                    var username = $("input[type=text][name=Username]").val().toLowerCase();
 
                     database.ref('users/' + username).once('value', function(snap) {
 
