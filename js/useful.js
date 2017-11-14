@@ -45,7 +45,14 @@ function getSchoolClubs() {
 
 function getDate(str) {
 	// Looks like MM/DD/YYYY hh:mm TT
-	try {
+	let datex = /\d\d\/\d\d\/\d\d\d\d\s\d\d:\d\d\s[A:P]M/
+
+	if (!(str.match(datex))) {
+		console.log("Date of unknown format.  Assuming it hasn't happened yet");
+		var r = new Date();
+		r.setSeconds(r.getSeconds() + 60);
+		return r;
+	} else {
 		var sects = str.split(' ');
 		var days = sects[0].split('/');
 		var times = sects[1].split(':');
@@ -57,16 +64,23 @@ function getDate(str) {
 		var hours = parseInt(times[0]);
 		var minutes = parseInt(times[1]);
 
+		if ((((mm + 1 == 1) || (mm + 1 == 3) || (mm + 1 == 5) || (mm + 1 == 7) || (mm + 1 == 8) || (mm + 1 == 10) || (mm + 1 == 12)) && (dd > 31))
+			|| (((mm + 1 == 4) || (mm + 1 == 6) || (mm + 1 == 9) || (mm + 1 == 11)) && (dd > 30))
+			|| ((mm + 1 == 2) && (yyyy % 4 != 0) && (dd > 28))
+			|| ((mm + 1 == 2) && (yyyy % 4 == 0) && (dd > 29))
+			|| (hours > 12) || (hours < 1) || (minutes > 60) || (minutes < 0) || (mm + 1 > 12) || (mm + 1 < 1)) {
+			console.log("Date Invalid");
+			var r = new Date();
+			r.setSeconds(r.getSeconds() - 1);
+			return r;
+		}
+
 		if (tt == "PM") {
 			hours += 12;
 		}
 
-		return new Date(yyyy, mm, dd, hours, minutes);
-	}
-	catch (e) {
-		console.log(e);
-		var r = new Date();
-		r.setSeconds(r.getSeconds() + 60);
-		return r;
+		var ret = new Date(yyyy, mm, dd, hours, minutes);
+		console.log("Date Valid");
+		return ret;
 	}
 }
