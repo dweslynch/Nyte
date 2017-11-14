@@ -1,10 +1,7 @@
 To Do:
 
 Version 1.0.0
-- Pick date and time directly
-- Hide (and delete?) events that have already happened
-- Fully implement clubs
-	- Join clubs on signup (optional)
+- Permissions
 
 Version 1.1.0
 - Add profile pages

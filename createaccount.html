@@ -129,7 +129,7 @@
             // Hot Validation
             $("input[type=text][name=Username]").keyup(function() {
                 var _username = $(this).val();
-                var alphanumeric = /^[a-z0-9]+$/
+                var alphanumeric = /^[a-z0-9_]+$/
 
                 // Don't go to database if login is too short
                 if (_username.length < 5) {
@@ -140,13 +140,13 @@
                     // Username contains invalid characters
                     $('#availability').css('opacity', '1.0');
                     $('#availability').css('color', 'red');
-                    $('#availability').text('Not Available');
+                    $('#availability').text('Invalid Username');
                     $('input[type=submit]').attr('disabled', true);
                     $('input[type=submit]').css('opacity', '0.0');
                 } else {
                     database.ref('users/' + _username).once('value', function(snap) {
                         if (snap.val() != null) {
-                            // User already exists or invalid name
+                            // User already exists
                             $('#availability').css('opacity', '1.0');
                             $('#availability').css('color', 'red');
                             $('#availability').text('Not Available');
